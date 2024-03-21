@@ -3,19 +3,19 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 
-//CarTest();
+CarTest();
 
 //BrandTest();
 
-ColorTest();
+//ColorTest();
 
 static void CarTest()
 {
     CarManager carManager = new CarManager(new EfCarDal());
 
-    foreach (var car in carManager.GetCarsByColorId(1))
+    foreach (var car in carManager.GetCarDetails())
     {
-        Console.WriteLine(car.Description);
+        Console.WriteLine(car.CarName + " " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
     }
 }
 
