@@ -12,29 +12,47 @@ CarTest();
 static void CarTest()
 {
     CarManager carManager = new CarManager(new EfCarDal());
-
-    foreach (var car in carManager.GetCarDetails())
+    var result = carManager.GetCarDetails();
+    if (result.Success)
     {
-        Console.WriteLine(car.CarName + " " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
+        foreach (var car in result.Data)
+        {
+            Console.WriteLine(car.CarName + " " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
+        }
+    }
+    else
+    {
+        Console.WriteLine(result.Message);
     }
 }
 
 static void BrandTest()
 {
     BrandManager brandManager = new BrandManager(new EfBrandDal());
-
-    foreach (var brand in brandManager.GetAll())
+    var result = brandManager.Add(new Brand { Name = "aa" });
+    if (result.Success)
     {
-        Console.WriteLine(brand.Name);
+        Console.WriteLine(result.Message);
+    }
+    else
+    {
+        Console.WriteLine(result.Message);
     }
 }
 
 static void ColorTest()
 {
     ColorManager colorManager = new ColorManager(new EfColorDal());
-
-    foreach (var color in colorManager.GetAll())
+    var result = colorManager.GetAll();
+    if (result.Success)
     {
-        Console.WriteLine(color.Name);
+        foreach (var color in result.Data)
+        {
+            Console.WriteLine(color.Name);
+        }
+    }
+    else
+    {
+        Console.WriteLine(result.Message);
     }
 }
