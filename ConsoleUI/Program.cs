@@ -3,11 +3,15 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 
-CarTest();
+//CarTest();
 
 //BrandTest();
 
 //ColorTest();
+
+//UserTest();
+
+RentalTest();
 
 static void CarTest()
 {
@@ -50,6 +54,41 @@ static void ColorTest()
         {
             Console.WriteLine(color.Name);
         }
+    }
+    else
+    {
+        Console.WriteLine(result.Message);
+    }
+}
+
+static void UserTest()
+{
+    UserManager userManager = new UserManager(new EfUserDal());
+    var result = userManager.GetAll();
+    if (result.Success)
+    {
+        foreach (var user in result.Data)
+        {
+            Console.WriteLine(user.FirstName + " " + user.LastName);
+        }
+    }
+    else
+    {
+        Console.WriteLine(result.Message);
+    }
+}
+
+static void RentalTest()
+{
+    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+    var result = rentalManager.Add(new Rental { CarId = 2, CustomerId = 2 });
+    if (result.Success)
+    {
+        //foreach (var rental in result.Data)
+        //{
+        //    Console.WriteLine(rental.CarId);
+        //}
+        Console.WriteLine(result.Message);
     }
     else
     {
