@@ -47,7 +47,12 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id));
+            var rental = _rentalDal.Get(r => r.Id == id);
+            if (rental == null)
+            {
+                return new ErrorDataResult<Rental>(Messages.RentalNotFoundWithId);
+            }
+            return new SuccessDataResult<Rental>(rental);
         }
 
         public IResult ReturnCar(Rental rental)

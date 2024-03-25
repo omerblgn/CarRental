@@ -39,7 +39,12 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
+            var user = _userDal.Get(u => u.Id == id);
+            if (user == null)
+            {
+                return new ErrorDataResult<User>(Messages.UserNotFoundWithId);
+            }
+            return new SuccessDataResult<User>(user);
         }
 
         public IResult Update(User user)
