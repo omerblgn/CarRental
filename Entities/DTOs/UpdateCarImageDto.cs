@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace Entities.DTOs
 {
-    public class UpdateCarImageDto
+    public class UpdateCarImageDto : IDto
     {
         public int Id { get; set; }
         public int CarId { get; set; }
