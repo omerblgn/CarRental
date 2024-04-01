@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -15,6 +16,7 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        [SecuredOperation("rental.add,moderator,admin,user")]
         public IResult Add(Rental rental)
         {
             var customerToRent = _rentalDal.Get(r => r.CustomerId == rental.CustomerId);
@@ -34,6 +36,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalAdded);
         }
 
+        [SecuredOperation("rental.delete,moderator,admin")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);
@@ -69,6 +72,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.RentalReturn);
         }
 
+        [SecuredOperation("rental.update,moderator,admin")]
         public IResult Update(Rental rental)
         {
             _rentalDal.Update(rental);

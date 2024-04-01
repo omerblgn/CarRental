@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
@@ -20,6 +21,7 @@ namespace Business.Concrete
             _fileService = fileService;
         }
 
+        [SecuredOperation("carimage.add,moderator,admin")]
         public IResult Add(AddCarImageDto addCarImageDto)
         {
             var result = BusinessRules.Run(CheckIfCarImageCountOfCarCorrect(addCarImageDto.CarId));
@@ -41,6 +43,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageAdded);
         }
 
+        [SecuredOperation("carimage.delete,moderator,admin")]
         public IResult Delete(CarImage carImage)
         {
             _fileService.Delete(carImage.ImagePath);
@@ -69,6 +72,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(images);
         }
 
+        [SecuredOperation("carimage.update,moderator,admin")]
         public IResult Update(UpdateCarImageDto updateCarImageDto)
         {
             var updatedCarImage = _carImageDal.Get(c => c.Id == updateCarImageDto.Id);
