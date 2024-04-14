@@ -60,6 +60,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
 
+        public IDataResult<CarDetailDto> GetCarDetailsById(int id)
+        {
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailsById(id));
+        }
+
         [CacheAspect]
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {

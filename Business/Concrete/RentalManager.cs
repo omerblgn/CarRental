@@ -4,6 +4,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -56,6 +57,11 @@ namespace Business.Concrete
                 return new ErrorDataResult<Rental>(Messages.RentalNotFoundWithId);
             }
             return new SuccessDataResult<Rental>(rental);
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalsDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
         }
 
         public IResult ReturnCar(Rental rental)
