@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Images\CarImages\1b7616ca-106c-4fc7-b811-c99725aa3645.jpeg" />
+    <Content Remove="wwwroot\Images\CarImages\71461ebf-25d2-4c08-b497-7627b7ebfaf8.jpeg" />
+    <Content Remove="wwwroot\Images\CarImages\a8eaf83c-a125-4987-aff9-a45c596a84b3.jpeg" />
+    <Content Remove="wwwroot\Images\CarImages\dc602244-e10b-43de-849b-5fed46836590.jpg" />
+    <Content Remove="wwwroot\Images\CarImages\defaultCarImage.jpeg" />
+    <Content Remove="wwwroot\Images\CarImages\f52f9c02-6fa0-4cc1-9979-2e6a13fd6a13.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
@@ -16,7 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Public\Images\CarImages\" />
+    <None Include="wwwroot\Images\CarImages\1b7616ca-106c-4fc7-b811-c99725aa3645.jpeg" />
+    <None Include="wwwroot\Images\CarImages\71461ebf-25d2-4c08-b497-7627b7ebfaf8.jpeg" />
+    <None Include="wwwroot\Images\CarImages\a8eaf83c-a125-4987-aff9-a45c596a84b3.jpeg" />
+    <None Include="wwwroot\Images\CarImages\dc602244-e10b-43de-849b-5fed46836590.jpg" />
+    <None Include="wwwroot\Images\CarImages\defaultCarImage.jpeg" />
+    <None Include="wwwroot\Images\CarImages\f52f9c02-6fa0-4cc1-9979-2e6a13fd6a13.jpeg" />
   </ItemGroup>
 
 </Project>

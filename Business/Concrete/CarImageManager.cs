@@ -100,7 +100,7 @@ namespace Business.Concrete
         private static string CreatePath(IFormFile formFile)
         {
             var fileInfo = new FileInfo(formFile.FileName);
-            string uploadPath = Path.Combine($@"{Environment.CurrentDirectory}\Public\Images\CarImages\{Guid.NewGuid()}{fileInfo.Extension}");
+            string uploadPath = Path.Combine($@"wwwroot\Images\CarImages\{Guid.NewGuid()}{fileInfo.Extension}");
             return uploadPath;
         }
 
@@ -110,7 +110,7 @@ namespace Business.Concrete
             {
                 new CarImage {
                     CarId = carId,
-                    ImagePath = Path.Combine($@"{Environment.CurrentDirectory}\Public\Images\CarImages\defaultCarImage.jpeg"),
+                    ImagePath = Path.Combine(@"wwwroot\Images\CarImages\defaultCarImage.jpeg"),
                     Date = DateTime.Now
                 }
             };

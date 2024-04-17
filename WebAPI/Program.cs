@@ -54,6 +54,8 @@ app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHead
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseAuthentication();
 
 app.UseAuthorization();
