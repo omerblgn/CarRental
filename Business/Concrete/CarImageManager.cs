@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Business;
 using Core.Utilities.FileOperations;
 using Core.Utilities.Results;
@@ -23,6 +24,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("carimage.add,moderator,admin")]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(AddCarImageDto addCarImageDto)
         {
             var result = BusinessRules.Run(CheckIfCarImageCountOfCarCorrect(addCarImageDto.CarId));
@@ -45,6 +47,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("carimage.delete,moderator,admin")]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(CarImage carImage)
         {
             _fileService.Delete(carImage.ImagePath);
@@ -74,6 +77,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("carimage.update,moderator,admin")]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(UpdateCarImageDto updateCarImageDto)
         {
             var updatedCarImage = _carImageDal.Get(c => c.Id == updateCarImageDto.Id);
