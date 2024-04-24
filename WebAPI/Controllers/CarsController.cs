@@ -135,5 +135,19 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getcardetailsbyfilters")]
+        public IActionResult GetCarDetailsByFilters([FromQuery] string? brandNames, [FromQuery] string? colorNames, [FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, [FromQuery] string? minYear, [FromQuery] string? maxYear)
+        {
+            var brands = brandNames?.Split(',') ?? [];
+            var colors = colorNames?.Split(',') ?? [];
+
+            var result = _carService.GetCarDetailsByFilters(brands.ToList(), colors.ToList(), minPrice, maxPrice, minYear, maxYear);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

@@ -39,10 +39,10 @@
         public static string RentalDeleted = "Araç kiralama silindi";
         public static string RentalUpdated = "Araç kiralama güncellendi";
         public static string RentalReturn = "Araç teslim edildi";
-        public static string RentalExist = "Araç zaten kiralanmış";
-        public static string RentalCustomerExist = "Müşteri zaten başka bir araç kiralanmış";
         public static string RentalNotFound = "Araç kiralama bulunamadı";
         public static string RentalNotFoundWithId = "İlgili Id'ye sahip kiralama bulunamadı";
+        public static string CustomerHasUnreturnedCar = "Şu anda başka bir araba kiraladığınız için yeni bir araba kiralayamazsınız";
+        public static string CarAlreadyRented = "Araba zaten kiralanmış";
 
         // CarImage
         public static string CarImageAdded = "Araç resmi eklendi";
@@ -60,5 +60,8 @@
         public static string AccessTokenCreated = "Access token oluşturuldu";
 
         public static string AuthorizationDenied = "Yetkiniz yok";
+
+        // Payment
+        public static string PaymentSuccess = "Ödeme başarılı";
     }
 }

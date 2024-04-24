@@ -21,7 +21,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  Id = rent.Id,
                                  BrandName = brand.Name,
                                  CustomerFullName = user.FirstName + " " + user.LastName,
-                                 RentDate = rent.RentDate,
+                                 RentStartDate = rent.RentStartDate,
+                                 RentEndDate = rent.RentEndDate,
                                  ReturnDate = rent.ReturnDate
                              };
                 return result.ToList();

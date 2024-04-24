@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,19 +21,12 @@ namespace Business.Concrete
         [SecuredOperation("rental.add,moderator,admin,user")]
         public IResult Add(Rental rental)
         {
-            var customerToRent = _rentalDal.Get(r => r.CustomerId == rental.CustomerId);
-            if (customerToRent != null)
+            var result = BusinessRules.Run(IsRentable(rental));
+            if (result != null)
             {
-                return new ErrorResult(Messages.RentalCustomerExist);
+                return result;
             }
 
-            var rentalToAdd = _rentalDal.Get(r => r.CarId == rental.CarId);
-            if (rentalToAdd != null)
-            {
-                return new ErrorResult(Messages.RentalExist);
-            }
-
-            rental.RentDate = DateTime.Now;
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
@@ -62,6 +56,23 @@ namespace Business.Concrete
         public IDataResult<List<RentalDetailDto>> GetRentalsDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
+        }
+
+        public IResult IsRentable(Rental rental)
+        {
+            var rentalsOfCustomer = _rentalDal.GetAll(r => r.CustomerId == rental.CustomerId);
+            if (rentalsOfCustomer.Any(r => r.ReturnDate == null || r.ReturnDate > DateTime.Now))
+            {
+                return new ErrorResult(Messages.CustomerHasUnreturnedCar);
+            }
+
+            var carToRent = _rentalDal.GetAll(r => r.CarId == rental.CarId);
+            if (carToRent.Any(r => r.RentEndDate >= rental.RentStartDate && r.RentStartDate <= rental.RentEndDate))
+            {
+                return new ErrorResult(Messages.CarAlreadyRented);
+            }
+
+            return new SuccessResult();
         }
 
         public IResult ReturnCar(Rental rental)
