@@ -96,6 +96,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("car.update,moderator,admin")]
+        [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {

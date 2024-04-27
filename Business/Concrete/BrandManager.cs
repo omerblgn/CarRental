@@ -49,6 +49,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("brand.update,moderator,admin")]
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
