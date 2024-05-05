@@ -27,6 +27,7 @@
         public static string UserDeleted = "Kullanıcı silindi";
         public static string UserUpdated = "Kullanıcı güncellendi";
         public static string UserNotFoundWithId = "İlgili Id'ye sahip kullanıcı bulunamadı";
+        public static string PasswordNotBeNullOrEmpty = "Şifre boş olamaz";
 
         // Customer
         public static string CustomerAdded = "Müşteri eklendi";
@@ -63,5 +64,13 @@
 
         // Payment
         public static string PaymentSuccess = "Ödeme başarılı";
+
+        // Credit Card
+        public static string CreditCardAdded = "Kredi kartı eklendi";
+        public static string CreditCardDeleted = "Kredi kartı silindi";
+        public static string CreditCardUpdated = "Kredi kartı güncellendi";
+        public static string CreditCardNotFoundWithId = "İlgili Id'ye sahip kredi kartı bulunamadı";
+        public static string CreditCardNotFoundByUserId = "İlgili kullanıcının kredi kartı bulunamadı";
+        public static string CreditCardExists = "Kredi kartı zaten eklenmiş";
     }
 }

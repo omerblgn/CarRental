@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete
 {
-    public partial class CarImageManager : ICarImageService
+    public class CarImageManager : ICarImageService
     {
         ICarImageDal _carImageDal;
         IFileService _fileService;
@@ -27,22 +27,27 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(AddCarImageDto addCarImageDto)
         {
-            var result = BusinessRules.Run(CheckIfCarImageCountOfCarCorrect(addCarImageDto.CarId));
+            var result = BusinessRules.Run(CheckIfCarImageCountOfCarCorrect(addCarImageDto.CarId, addCarImageDto.FormFiles.Count));
             if (result != null)
             {
                 return result;
             }
 
-            string uploadPath = _fileService.Add(addCarImageDto.formFile, CreatePath(addCarImageDto.formFile));
-
-            var carImage = new CarImage
+            foreach (var formFile in addCarImageDto.FormFiles)
             {
-                CarId = addCarImageDto.CarId,
-                ImagePath = uploadPath,
-                Date = DateTime.Now
-            };
+                string uploadPath = _fileService.Add(formFile, CreatePath(formFile));
 
-            _carImageDal.Add(carImage);
+                var carImage = new CarImage
+                {
+                    CarId = addCarImageDto.CarId,
+                    ImagePath = uploadPath,
+                    Date = DateTime.Now
+                };
+
+                _carImageDal.Add(carImage);
+            }
+
+
             return new SuccessResult(Messages.CarImageAdded);
         }
 
@@ -91,10 +96,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarImageUpdated);
         }
 
-        private IResult CheckIfCarImageCountOfCarCorrect(int carId)
+        private IResult CheckIfCarImageCountOfCarCorrect(int carId, int addedImageCount)
         {
-            var result = _carImageDal.GetAll(c => c.CarId == carId).Count;
-            if (result >= 5)
+            var currentImageCount = _carImageDal.GetAll(c => c.CarId == carId).Count;
+            var totalImageCount = currentImageCount + addedImageCount;
+            if (totalImageCount > 5)
             {
                 return new ErrorResult(Messages.CarImageCountOfCarError);
             }
