@@ -45,7 +45,7 @@
         public static string CustomerHasUnreturnedCar = "Şu anda başka bir araba kiraladığınız için yeni bir araba kiralayamazsınız";
         public static string CarAlreadyRented = "Araba zaten kiralanmış";
 
-        // CarImage
+        // Car Image
         public static string CarImageAdded = "Araç resmi eklendi";
         public static string CarImageDeleted = "Araç resmi silindi";
         public static string CarImageUpdated = "Araç resmi güncellendi";
@@ -72,5 +72,11 @@
         public static string CreditCardNotFoundWithId = "İlgili Id'ye sahip kredi kartı bulunamadı";
         public static string CreditCardNotFoundByUserId = "İlgili kullanıcının kredi kartı bulunamadı";
         public static string CreditCardExists = "Kredi kartı zaten eklenmiş";
+
+        // Operation Claim
+        public static string OperationClaimNotFoundWithId = "İlgili Id'ye sahip rol bulunamadı";
+        public static string OperationClaimAdded = "Rol eklendi";
+        public static string OperationClaimUpdated = "Rol güncellendi";
+        public static string OperationClaimDeleted = "Rol silindi";
     }
 }
